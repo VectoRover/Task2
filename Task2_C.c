@@ -32,7 +32,7 @@ int Search(FILE* file, char* word){
                 if (letter_flag == len_of_temp){
                     if (temp[0] == 'A'){
                         if (len_of_temp < min_word){
-                            word = realloc(word, (len_of_temp+1)*sizeof(char));
+                            word = (char*)realloc(word, (len_of_temp+1)*sizeof(char));
                             for (int letter_index = 0; letter_index < len_of_temp + 1; letter_index++){
                                 word[letter_index] = temp[letter_index];
                             }
@@ -41,12 +41,12 @@ int Search(FILE* file, char* word){
                 }
             }
             len_of_temp = 0;
-            temp = realloc(temp, 0* sizeof(char));
+            temp = (char*)realloc(temp, 0* sizeof(char));
             continue;
         }
         if ((current != '"') && (number_of_quots%2 == 1)){
             len_of_temp++;
-            temp = realloc(temp, sizeof(char)*(len_of_temp+1));
+            temp = (char*)realloc(temp, sizeof(char)*(len_of_temp+1));
             temp[len_of_temp -1] = current;
             temp[len_of_temp] = '\0';
         }
