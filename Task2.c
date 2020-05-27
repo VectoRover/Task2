@@ -5,7 +5,6 @@
 #include <limits.h>
 
 int func(const char* filename, char* slovo);
-void autotest(void);
 
 int func(const char* filename, char* slovo){
 FILE *input;
@@ -13,10 +12,9 @@ int b=0;
 char str[512],word[512], *sbegin, *send;
 int min=INT_MAX;
 input=fopen(filename, "r");
-if (input)
-    {
+if (input){
     while(fgets(str,256,input))
-    {
+          {
         for(sbegin=strchr(str, '"'), send=(sbegin?strchr(sbegin+1,'"'):NULL);
         sbegin&&send;
         sbegin=strchr(send+1,'"'),send=(sbegin?strchr(sbegin+1,'"'):NULL))
@@ -35,20 +33,11 @@ if (input)
 }
 else
     {
-        printf("Невозможно открыть файл");
+        printf("Невозможно открыть файл\n");
         return -5;
     }
 fclose(input);
 return b;
-}
-
-void autotest(void){
-char slovo[256];
-func("text.txt", slovo);
-if (strlen(slovo)==2){
-    printf("Автотест сдан\n");
-}
-else {printf("Автотест провален\n");}
 }
 
 int main(void){
@@ -61,5 +50,4 @@ int main(void){
   else{
     printf("Такого слова нет\n");
       }
-  autotest();
 }
