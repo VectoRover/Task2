@@ -8,7 +8,7 @@ int func(const char* filename, char* slovo);
 
 int func(const char* filename, char* slovo){
 FILE *input;
-int b=0;
+int b = 0, flag = 0;
 char str[512],word[512], *sbegin, *send;
 int min=INT_MAX;
 input=fopen(filename, "r");
@@ -21,7 +21,16 @@ if (input){
         {
             strncpy(word,sbegin+1,send-sbegin-1);
              word[send-sbegin-1]='\0';
-             if(strlen(word) <= min && *word <= 'A' && *word <= 'Z' && word[0] == 'A')
+
+             for(int i = 0; i < strlen(word); i++){
+                if(word[i] >= 'A' && word[i] <= 'Z'){
+                  flag = 1;
+                  continue;
+                }
+             flag = 0;
+             break;
+             }
+             if(strlen(word) <= min && flag == 1 && word[0] == 'A')
             {
               b = 1;
               min=strlen(word);
